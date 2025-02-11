@@ -37,7 +37,7 @@ npm install
 To start the application, use the following command:
 
 ```bash
-npm start
+npm run dev
 ```
 
 ## Running Tests
