@@ -3,13 +3,14 @@ import { MySQLAdapter } from "./adapters/mysql";
 import { QueryAnalyzer } from "./core/analyzer";
 import { QueryProfiler } from "./core/profiler";
 import { QueryOptimizer } from "./core/optimizer";
+import { Database } from "./interfaces/database";
 import config from "./config/default";
 
 async function initializeApp() {
   console.log("Initializing Query Optimization Profiler...");
 
   // Initialize database adapters based on dialect
-  let dbAdapter;
+  let dbAdapter: Database;
 
   if (config.database.dialect === "postgres") {
     dbAdapter = new PostgreSQLAdapter({
@@ -27,16 +28,16 @@ async function initializeApp() {
       password: config.database.mysql.password as string,
       database: config.database.mysql.database as string,
     });
+  } else {
+    throw new Error(`Unsupported database dialect: ${config.database.dialect}`);
   }
 
   try {
-    await dbAdapter?.connect();
-    console.log(
-      `Successfully connected to ${config.database.dialect} database`
-    );
+    await dbAdapter.connect();
+    console.log(`Successfully connected to ${config.database.dialect} database`);
 
     // Initialize core components
-    const queryAnalyzer = new QueryAnalyzer();
+    const queryAnalyzer = new QueryAnalyzer(dbAdapter);
     const queryProfiler = new QueryProfiler();
     const queryOptimizer = new QueryOptimizer();
   } catch (error: any) {
