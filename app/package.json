@@ -1,0 +1,36 @@
+{
+  "name": "query-optimization-profiler",
+  "version": "1.0.0",
+  "description": "A tool that integrates with popular databases to analyze and optimize slow-performing queries.",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts"
+  },
+  "dependencies": {
+    "@types/pg": "^8.11.11",
+    "dotenv": "^16.4.7",
+    "mongodb": "^4.1.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.12.0",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "jest": "^27.0.6",
+    "nodemon": "^3.1.9",
+    "ts-jest": "^27.0.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.5.4"
+  },
+  "keywords": [
+    "database",
+    "query",
+    "optimization",
+    "profiler"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
